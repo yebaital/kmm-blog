@@ -25,3 +25,8 @@ kotlin-js-store
 # Gradle ignores
 .gradle
 
+/server/src/main/resources/application.properties
+/server/src/main/kotlin/code/yousef/utilities/DataInitializer.kt
+/server/src/main/resources/META-INF/resources/rsaPrivateKey.pem
+/server/src/main/resources/publicKey.pem
+/server/src/main/resources/privateKey.pem

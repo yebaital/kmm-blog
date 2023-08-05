@@ -1,17 +1,18 @@
 package code.yousef.blog.components.layouts
 
-import androidx.compose.runtime.*
-import com.varabyte.kobweb.compose.css.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import code.yousef.blog.components.sections.Footer
+import code.yousef.blog.components.sections.NavHeader
+import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import kotlinx.browser.document
-import org.jetbrains.compose.web.css.*
-import org.jetbrains.compose.web.dom.*
-import code.yousef.blog.components.sections.Footer
-import code.yousef.blog.components.sections.NavHeader
+import org.jetbrains.compose.web.css.fr
+import org.jetbrains.compose.web.css.percent
 
 @Composable
 fun PageLayout(title: String, content: @Composable () -> Unit) {
@@ -34,7 +35,6 @@ fun PageLayout(title: String, content: @Composable () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             NavHeader()
-            H1 { Text(title) }
             content()
         }
         // Associate the footer with the row that will get pushed off the bottom of the page if it can't fit.

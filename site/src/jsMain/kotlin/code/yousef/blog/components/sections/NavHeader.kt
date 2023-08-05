@@ -1,6 +1,8 @@
 package code.yousef.blog.components.sections
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.dom.ElementTarget
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -61,6 +63,7 @@ fun NavHeader() {
             NavLink("/", "HOME")
             NavLink("/about", "ABOUT")
             NavLink("/markdown", "MARKDOWN")
+            NavLink("/admin", "ADMIN")
             Spacer()
 
             Button(
