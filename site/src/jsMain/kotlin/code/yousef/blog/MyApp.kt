@@ -1,7 +1,9 @@
 package code.yousef.blog
 
 import androidx.compose.runtime.*
+import code.yousef.blog.theme.theme
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.attrsModifier
 import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
 import com.varabyte.kobweb.compose.ui.modifiers.minHeight
 import com.varabyte.kobweb.core.App
@@ -29,6 +31,9 @@ public val liveLocale by lazy { mutableStateOf(localStorage.getItem("LOCALE")) }
 fun initSilk(ctx: InitSilkContext) {
     ctx.config.initialColorMode = localStorage.getItem(COLOR_MODE_KEY)?.let { ColorMode.valueOf(it) } ?: ColorMode.LIGHT
 
+    // Color theme
+    ctx.theme.palettes = theme
+
     ctx.stylesheet.registerBaseStyle("body") {
         Modifier.fontFamily(
             "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
@@ -45,6 +50,7 @@ fun MyApp(content: @Composable () -> Unit) {
 
     i18n4k = i18n4kConfig
     i18n4kConfig.locale = liveLocale.value?.let { Locale(it) } ?: Locale("en")
+
     key(liveLocale.value) {
         SilkApp {
             val colorMode = getColorMode()
@@ -52,7 +58,9 @@ fun MyApp(content: @Composable () -> Unit) {
                 localStorage.setItem(COLOR_MODE_KEY, colorMode.name)
             }
 
-            Surface(SmoothColorStyle.toModifier().minHeight(100.vh)) {
+            Surface(
+                SmoothColorStyle.toModifier().minHeight(100.vh)
+                    .attrsModifier { attr("dir", if (liveLocale.value == "ar") "rtl" else "ltr") }) {
                 content()
             }
         }

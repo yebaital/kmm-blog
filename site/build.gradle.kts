@@ -1,4 +1,7 @@
+
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
+import kotlinx.html.link
+import kotlinx.html.script
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -14,6 +17,13 @@ version = "1.0-SNAPSHOT"
 kobweb {
     app {
         index {
+            head.add {
+                link(
+                    href = "https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css",
+                    rel = "stylesheet"
+                )
+                script(src = "https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js") {}
+            }
             description.set("Powered by Kobweb")
         }
     }
@@ -47,6 +57,8 @@ kotlin {
 
                 // KMM
                 implementation(project(":shared"))
+
+                implementation(npm("easymde", "2.18.0"))
             }
         }
 
