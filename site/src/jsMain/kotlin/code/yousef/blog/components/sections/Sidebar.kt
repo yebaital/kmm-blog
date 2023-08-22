@@ -56,7 +56,7 @@ fun Sidebar(
                         horizontalArrangement = Arrangement.Center,
                         modifier = Modifier
                             .onClick {
-                                context.router.navigateTo("admin/" + row.replace(" ", "").lowercase())
+                                context.router.navigateTo("/admin/" + row.replace(" ", "").lowercase())
                             }
                             .cursor(Cursor.Pointer)
                             .fillMaxWidth()

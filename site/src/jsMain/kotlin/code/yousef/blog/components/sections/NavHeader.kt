@@ -13,6 +13,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.icons.fa.FaLightbulb
 import com.varabyte.kobweb.silk.components.icons.fa.FaMoon
@@ -23,7 +24,6 @@ import com.varabyte.kobweb.silk.components.overlay.Tooltip
 import com.varabyte.kobweb.silk.components.style.*
 import com.varabyte.kobweb.silk.components.style.common.SmoothColorStyle
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.varabyte.kobweb.silk.theme.colors.rememberColorMode
 import de.comahe.i18n4k.i18n4k
 import kotlinx.browser.localStorage
 import org.jetbrains.compose.web.css.percent
@@ -61,8 +61,9 @@ private fun NavLink(path: String, text: String) {
 @Composable
 fun NavHeader() {
 
-    var colorMode by rememberColorMode()
+    var colorMode by ColorMode.currentState
     var localeR by rememberLocale()
+    val ctx = rememberPageContext()
 
     Box(NavHeaderStyle.toModifier()) {
         Row(
@@ -73,9 +74,21 @@ fun NavHeader() {
             NavLink("/about", Strings.About(i18n4k.locale))
             NavLink("/blog", Strings.Blog(i18n4k.locale))
             NavLink("/markdown", "MARKDOWN")
-            NavLink("/admin", Strings.Admin(i18n4k.locale))
+            if (!localStorage.getItem("JWT").isNullOrEmpty()) {
+                NavLink("/admin", Strings.Admin(i18n4k.locale))
+            }
             Spacer()
-
+            if (!localStorage.getItem("JWT").isNullOrEmpty()) {
+                Button(
+                    modifier = Modifier.height(35.px).width(70.px),
+                    onClick = {
+                        localStorage.removeItem("JWT")
+                        ctx.router.navigateTo("/")
+                    }
+                ) {
+                    Text("Logout")
+                }
+            }
             Button(
                 onClick = {
                     when (localeR) {
@@ -83,6 +96,7 @@ fun NavHeader() {
                             localStorage.setItem("LOCALE", "ar")
                             localeR = "ar"
                         }
+
                         "ar" -> {
                             localStorage.setItem("LOCALE", "en")
                             localeR = "en"
@@ -101,7 +115,7 @@ fun NavHeader() {
             Tooltip(ElementTarget.PreviousSibling, "Switch language", placement = PopupPlacement.BottomRight)
 
             Button(
-                onClick = { colorMode = colorMode.opposite() },
+                onClick = { colorMode = colorMode.opposite },
                 NavItemStyle.toModifier(NavButtonVariant)
             ) {
                 Box(Modifier.margin(8.px)) {

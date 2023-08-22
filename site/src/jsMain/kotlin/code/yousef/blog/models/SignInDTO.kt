@@ -1,4 +1,4 @@
-package code.yousef.models.dto
+package code.yousef.blog.models
 
 import code.yousef.blog.shared.common.main.models.ISignInDTO
 import kotlinx.serialization.Serializable

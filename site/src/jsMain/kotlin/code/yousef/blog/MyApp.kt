@@ -1,7 +1,13 @@
 package code.yousef.blog
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.key
+import androidx.compose.runtime.remember
+import code.yousef.blog.di.authViewModelModule
+import code.yousef.blog.di.networkModule
 import code.yousef.blog.theme.theme
+import code.yousef.blog.utils.Constants.liveLocale
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.attrsModifier
 import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
@@ -15,17 +21,15 @@ import com.varabyte.kobweb.silk.init.InitSilk
 import com.varabyte.kobweb.silk.init.InitSilkContext
 import com.varabyte.kobweb.silk.init.registerBaseStyle
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.varabyte.kobweb.silk.theme.colors.getColorMode
 import de.comahe.i18n4k.Locale
 import de.comahe.i18n4k.config.I18n4kConfigDefault
 import de.comahe.i18n4k.i18n4k
 import kotlinx.browser.localStorage
 import org.jetbrains.compose.web.css.vh
+import org.koin.core.context.startKoin
+import org.koin.dsl.KoinAppDeclaration
 
 private const val COLOR_MODE_KEY = "blog:colorMode"
-
-public val liveLocale by lazy { mutableStateOf(localStorage.getItem("LOCALE")) }
-
 
 @InitSilk
 fun initSilk(ctx: InitSilkContext) {
@@ -40,6 +44,8 @@ fun initSilk(ctx: InitSilkContext) {
             "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "sans-serif"
         )
     }
+
+
 }
 
 @App
@@ -51,9 +57,13 @@ fun MyApp(content: @Composable () -> Unit) {
     i18n4k = i18n4kConfig
     i18n4kConfig.locale = liveLocale.value?.let { Locale(it) } ?: Locale("en")
 
+    LaunchedEffect(Unit){
+        initKoin()
+    }
+
     key(liveLocale.value) {
         SilkApp {
-            val colorMode = getColorMode()
+            val colorMode = ColorMode.current
             LaunchedEffect(colorMode) {
                 localStorage.setItem(COLOR_MODE_KEY, colorMode.name)
             }
@@ -69,3 +79,11 @@ fun MyApp(content: @Composable () -> Unit) {
 
 @Composable
 fun rememberLocale() = remember { liveLocale }
+
+fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
+    appDeclaration()
+    modules(
+        networkModule,
+        authViewModelModule
+    )
+}

@@ -1,4 +1,3 @@
-
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
 import kotlinx.html.link
 import kotlinx.html.script
@@ -9,6 +8,7 @@ plugins {
     alias(libs.plugins.kobweb.application)
     alias(libs.plugins.kobwebx.markdown) apply true
     id("de.comahe.i18n4k") version "0.6.0"
+    kotlin("plugin.serialization") version "1.8.20"
 }
 
 group = "code.yousef.blog"
@@ -37,6 +37,10 @@ kotlin {
 
     @Suppress("UNUSED_VARIABLE") // Suppress spurious warnings about sourceset variables not being used
     sourceSets {
+
+        val ktor_version: String by project
+        val koin_version: String by project
+
         val commonMain by getting {
             dependencies {
                 implementation(compose.runtime)
@@ -58,7 +62,18 @@ kotlin {
                 // KMM
                 implementation(project(":shared"))
 
+                // Markdown editor
                 implementation(npm("easymde", "2.18.0"))
+
+                // Ktor
+                implementation("io.ktor:ktor-client-core:$ktor_version")
+                implementation("io.ktor:ktor-client-serialization:$ktor_version")
+                implementation("io.ktor:ktor-client-js:$ktor_version")
+                implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+
+                // Koin
+                implementation("io.insert-koin:koin-core:$koin_version")
             }
         }
 
@@ -70,7 +85,7 @@ i18n4k {
 }
 
 
-tasks.withType(type = ProcessResources::class){
+tasks.withType(type = ProcessResources::class) {
     dependsOn(":site:generateI18n4kFiles")
 }
 

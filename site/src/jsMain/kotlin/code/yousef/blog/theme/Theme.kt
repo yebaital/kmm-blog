@@ -1,5 +1,6 @@
 package code.yousef.blog.theme
 
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.MutableSilkPalette
 import com.varabyte.kobweb.silk.theme.colors.MutableSilkPalettes
 
@@ -29,9 +30,12 @@ val theme = MutableSilkPalettes(
             hover = DarkTheme.TAB_HOVER.color,
             pressed = DarkTheme.TAB_PRESSED.color,
             disabled = DarkTheme.TAB_DISABLED.color,
-            border = DarkTheme.TAB_BORDER.color,
             selectedBackground = DarkTheme.TAB_SELECTED_BACKGROUND.color,
             selectedBorder = DarkTheme.TAB_SELECTED_BORDER.color
+        ),
+        input = MutableSilkPalette.Input(
+            colorMode = ColorMode.DARK,
+            filled = DarkTheme.TEXT.color
         )
     ),
     light = MutableSilkPalette(
@@ -59,9 +63,12 @@ val theme = MutableSilkPalettes(
             hover = LightTheme.TAB_HOVER.color,
             pressed = LightTheme.TAB_PRESSED.color,
             disabled = LightTheme.TAB_DISABLED.color,
-            border = LightTheme.TAB_BORDER.color,
             selectedBackground = LightTheme.TAB_SELECTED_BACKGROUND.color,
             selectedBorder = LightTheme.TAB_SELECTED_BORDER.color
+        ),
+        input = MutableSilkPalette.Input(
+            colorMode = ColorMode.LIGHT,
+            filled = LightTheme.TEXT.color
         )
     )
 )
