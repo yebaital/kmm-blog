@@ -5,6 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import code.yousef.blog.di.authViewModelModule
+import code.yousef.blog.di.createPostViewModelModule
 import code.yousef.blog.di.networkModule
 import code.yousef.blog.theme.theme
 import code.yousef.blog.utils.Constants.liveLocale
@@ -44,8 +45,6 @@ fun initSilk(ctx: InitSilkContext) {
             "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "sans-serif"
         )
     }
-
-
 }
 
 @App
@@ -84,6 +83,7 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
     appDeclaration()
     modules(
         networkModule,
-        authViewModelModule
+        authViewModelModule,
+        createPostViewModelModule
     )
 }

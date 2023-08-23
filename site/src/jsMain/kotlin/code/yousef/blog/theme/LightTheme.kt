@@ -52,4 +52,10 @@ enum class LightTheme(val color: Color) {
     TAB_BORDER(color = Color.rgb(0x87CEEB)),
     TAB_SELECTED_BACKGROUND(color = Color.rgb(0x87CEEB)),
     TAB_SELECTED_BORDER(color = Color.rgb(0x00008B)),
+    INPUT_FILLED(color = Color.rgb(0x65737E)),
+    INPUT_FOCUSED_BORDER(color = Color.rgb(0xAFEEEE)),
+    INPUT_HOVERED_BORDER(color = Color.rgb(0xAFEEEE)),
+    INPUT_INVALID_BORDER(color = Color.rgb(0x008080)),
+    INPUT_FILLED_HOVER(color = Color.rgb(0x40E0D0)),
+    INPUT_FILLED_FOCUS(color = Color.rgb(0x65737E)),
 }

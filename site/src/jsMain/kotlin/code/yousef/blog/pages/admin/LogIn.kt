@@ -7,7 +7,7 @@ import code.yousef.blog.di.GetAuthViewModel.getAuthViewModel
 import code.yousef.blog.utils.Constants.FIELD_WIDTH
 import code.yousef.blog.utils.Constants.PADDING_BOTTOM
 import code.yousef.blog.utils.Constants.PADDING_TOP
-import code.yousef.blog.viewmodels.AuthViewModel
+import code.yousef.blog.pages.viewmodels.AuthViewModel
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment

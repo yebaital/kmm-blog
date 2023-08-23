@@ -1,6 +1,7 @@
 package code.yousef.blog.di
 
-import code.yousef.blog.viewmodels.AuthViewModel
+import code.yousef.blog.pages.viewmodels.AuthViewModel
+import code.yousef.blog.pages.viewmodels.CreatePostViewModel
 import io.ktor.client.*
 import io.ktor.client.engine.js.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -26,6 +27,15 @@ val authViewModelModule: Module
         single { AuthViewModel(get()) }
     }
 
+val createPostViewModelModule: Module
+    get() = module {
+        single { CreatePostViewModel(get()) }
+    }
+
 object GetAuthViewModel : KoinComponent {
     fun getAuthViewModel() = get<AuthViewModel>()
+}
+
+object GetCreatePostViewModel : KoinComponent {
+    fun getCreatePostViewModel() = get<CreatePostViewModel>()
 }

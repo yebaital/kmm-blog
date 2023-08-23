@@ -1,4 +1,4 @@
-package code.yousef.blog.viewmodels
+package code.yousef.blog.pages.viewmodels
 
 import code.yousef.blog.models.AuthResponseDTO
 import code.yousef.blog.models.SignInDTO
@@ -23,8 +23,9 @@ class AuthViewModel(private val client: HttpClient) {
             throw Exception("Authentication failed with status ${response.status}")
         }
 
-        val tokenResponse: AuthResponseDTO = AuthResponseDTO(response.bodyAsText())
+        val tokenResponse: AuthResponseDTO = Json.decodeFromString(response.bodyAsText())
         val token = tokenResponse.token
+        println(token)
         // Store the token
         localStorage.setItem("JWT", token)
 

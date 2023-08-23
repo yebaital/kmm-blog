@@ -52,4 +52,10 @@ enum class DarkTheme(val color: Color) {
     TAB_BORDER(color = Color.rgb(0x65737E)),
     TAB_SELECTED_BACKGROUND(color = Color.rgb(0x1B2B34)),
     TAB_SELECTED_BORDER(color = Color.rgb(0xEC5F67)),
+    INPUT_FILLED(color = Color.rgb(0xD8DEE9)),
+    INPUT_FOCUSED_BORDER(color = Color.rgb(0xEC5F67)),
+    INPUT_HOVERED_BORDER(color = Color.rgb(0xF99157)),
+    INPUT_INVALID_BORDER(color = Color.rgb(0xF99157)),
+    INPUT_FILLED_HOVER(color = Color.rgb(0xEC5F67)),
+    INPUT_FILLED_FOCUS(color = Color.rgb(0xD8DEE9)),
 }

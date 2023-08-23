@@ -1,6 +1,6 @@
 package code.yousef.blog.models
 
-import code.yousef.blog.shared.common.main.models.ISignInDTO
+import code.yousef.blog.shared.common.main.models.dto.ISignInDTO
 import kotlinx.serialization.Serializable
 
 @Serializable
