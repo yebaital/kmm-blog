@@ -31,3 +31,4 @@ kotlin-js-store
 /server/src/main/resources/publicKey.pem
 /server/src/main/resources/privateKey.pem
 /local.properties
+/oldserver/

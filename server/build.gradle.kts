@@ -1,80 +1,49 @@
 plugins {
-    kotlin("jvm") version "1.8.20"
-    kotlin("plugin.allopen") version "1.8.20"
-    id("io.quarkus")
-    kotlin("plugin.serialization") version "1.8.20"
+    kotlin("jvm") version "1.9.21"
+    application
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.21"
+}
+
+group = "code.yousef"
+version = "0.0.1"
+
+val ktor_version: String by project
+val kotlin_version: String by project
+val logback_version: String by project
+
+val postgres_version: String by project
+val h2_version: String by project
+val prometeus_version: String by project
+
+application {
+    mainClass.set("code.yousef.ApplicationKt")
+
+    val isDevelopment: Boolean = project.ext.has("development")
+    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
 
 repositories {
     mavenCentral()
-    mavenLocal()
 }
-
-val quarkusPlatformGroupId: String by project
-val quarkusPlatformArtifactId: String by project
-val quarkusPlatformVersion: String by project
 
 dependencies {
     implementation(project(":shared"))
 
-    implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
-//    implementation("io.quarkus:quarkus-resteasy-reactive")
-    implementation("io.quarkus:quarkus-resteasy-reactive-kotlin")
-    implementation("io.quarkus:quarkus-kotlin")
-    implementation("io.quarkus:quarkus-smallrye-jwt")
-    implementation("io.quarkus:quarkus-hibernate-reactive-panache-kotlin")
-    implementation("io.quarkus:quarkus-reactive-pg-client")
-    implementation("io.quarkus:quarkus-smallrye-jwt-build")
-    implementation("io.quarkus:quarkus-resteasy-reactive-kotlin-serialization")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("io.quarkus:quarkus-arc")
-    implementation("io.quarkus:quarkus-smallrye-openapi")
-    implementation("io.quarkus:quarkus-security-jpa-reactive")
-    implementation ("io.vertx:vertx-lang-kotlin-coroutines:4.1.5")
-
-    // Slugify
-    implementation("com.github.slugify:slugify:3.0.5")
-    runtimeOnly("com.github.slugify:slugify:3.0.5") {
-        capabilities {
-            requireCapability("com.github.slugify:slugify-transliterator")
-        }
-    }
-
-    implementation("com.benasher44:uuid:0.7.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.4.0")
-
-    testImplementation("io.quarkus:quarkus-junit5")
-    testImplementation("io.rest-assured:rest-assured")
-}
-
-
-
-group = "code.yousef"
-version = "1.0.0-SNAPSHOT"
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-
-}
-
-tasks.withType<Test> {
-    systemProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager")
-}
-
-allOpen {
-    annotation("jakarta.ws.rs.Path")
-    annotation("jakarta.enterprise.context.ApplicationScoped")
-    annotation("io.quarkus.test.junit.QuarkusTest")
-    annotation("io.quarkus.vertx.web.RouteBase")
-    annotation("io.quarkus.vertx.web.Route")
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
-    kotlinOptions.javaParameters = true
-}
-
-tasks.named("compileKotlin") {
-    dependsOn("compileQuarkusGeneratedSourcesJava")
+    implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
+    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
+    implementation("org.postgresql:postgresql:$postgres_version")
+    implementation("com.h2database:h2:$h2_version")
+    implementation("io.ktor:ktor-server-metrics-micrometer-jvm:$ktor_version")
+    implementation("io.micrometer:micrometer-registry-prometheus:$prometeus_version")
+    implementation("io.ktor:ktor-server-metrics-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-swagger-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-openapi:$ktor_version")
+    implementation("io.ktor:ktor-server-cors-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-auth-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-auth-jwt-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-cio:$ktor_version")
+    implementation("ch.qos.logback:logback-classic:$logback_version")
+    testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }

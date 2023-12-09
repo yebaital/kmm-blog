@@ -58,4 +58,5 @@ enum class LightTheme(val color: Color) {
     INPUT_INVALID_BORDER(color = Color.rgb(0x008080)),
     INPUT_FILLED_HOVER(color = Color.rgb(0x40E0D0)),
     INPUT_FILLED_FOCUS(color = Color.rgb(0x65737E)),
+    CHECKBOX_BACKGROUND(color = Color.rgb(0x65737E)),
 }

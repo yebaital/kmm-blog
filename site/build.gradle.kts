@@ -7,8 +7,8 @@ plugins {
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kobweb.application)
     alias(libs.plugins.kobwebx.markdown) apply true
-    id("de.comahe.i18n4k") version "0.6.0"
-    kotlin("plugin.serialization") version "1.8.20"
+    id("de.comahe.i18n4k") version "0.7.0"
+    kotlin("plugin.serialization") version "1.9.21"
 }
 
 group = "code.yousef.blog"
@@ -31,8 +31,6 @@ kobweb {
 
 kotlin {
 
-    val i18nkVersion = "0.6.0"
-
     configAsKobwebApplication("blog", includeServer = false)
 
     @Suppress("UNUSED_VARIABLE") // Suppress spurious warnings about sourceset variables not being used
@@ -40,11 +38,12 @@ kotlin {
 
         val ktor_version: String by project
         val koin_version: String by project
+        val i18nk_version = "0.7.0"
 
         val commonMain by getting {
             dependencies {
                 implementation(compose.runtime)
-                implementation("de.comahe.i18n4k:i18n4k-core:$i18nkVersion")
+                implementation("de.comahe.i18n4k:i18n4k-core:$i18nk_version")
             }
         }
 
@@ -57,7 +56,7 @@ kotlin {
                 implementation(libs.kobwebx.markdown)
 
                 // Localization
-                implementation("de.comahe.i18n4k:i18n4k-core-js:$i18nkVersion")
+                implementation("de.comahe.i18n4k:i18n4k-core-js:$i18nk_version")
 
                 // KMM
                 implementation(project(":shared"))
@@ -72,6 +71,8 @@ kotlin {
                 implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
 
+                implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.21")
+
                 // Koin
                 implementation("io.insert-koin:koin-core:$koin_version")
             }
@@ -84,11 +85,9 @@ i18n4k {
     sourceCodeLocales = listOf("en", "ar")
 }
 
-
-tasks.withType(type = ProcessResources::class) {
-    dependsOn(":site:generateI18n4kFiles")
-}
-
+//tasks.withType(type = ProcessResources::class) {
+//    dependsOn(":site:generateI18n4kFiles")
+//}
 
 gradle.taskGraph.whenReady {
     allTasks

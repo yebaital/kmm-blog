@@ -58,4 +58,5 @@ enum class DarkTheme(val color: Color) {
     INPUT_INVALID_BORDER(color = Color.rgb(0xF99157)),
     INPUT_FILLED_HOVER(color = Color.rgb(0xEC5F67)),
     INPUT_FILLED_FOCUS(color = Color.rgb(0xD8DEE9)),
+    CHECKBOX_BACKGROUND(color = Color.rgb(0xD8DEE9)),
 }

@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Post(
     override var id: String? = null,
-    override var header: String,
+    override var header: String? = null,
     override var postTitle: String,
     override var postSlug: String? = null,
     override var summary: String,

@@ -1,7 +1,7 @@
 import com.varabyte.kobweb.gradle.library.util.configAsKobwebLibrary
 
 plugins {
-    kotlin("multiplatform") version "1.8.20"
+    kotlin("multiplatform") version "1.9.21"
     alias(libs.plugins.kobweb.library)
 }
 

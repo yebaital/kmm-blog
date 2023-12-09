@@ -6,7 +6,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PostDTO(
-    override var header: String,
     override var postTitle: String,
     override var summary: String,
     override var body: String,

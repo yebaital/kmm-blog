@@ -27,22 +27,21 @@ import io.ktor.http.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.web.attributes.cols
-import org.jetbrains.compose.web.attributes.multiple
-import org.jetbrains.compose.web.attributes.required
-import org.jetbrains.compose.web.attributes.rows
+import org.jetbrains.compose.web.attributes.*
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.*
 import org.w3c.dom.HTMLOptionElement
 import org.w3c.dom.HTMLSelectElement
+import org.w3c.dom.asList
 import org.w3c.dom.get
+import org.w3c.files.File
+import org.w3c.xhr.FormData
 import x.y.Strings
 
 @Composable
 @Page
 fun CreatePost(viewModel: CreatePostViewModel = getCreatePostViewModel()) {
     // TODO: Add a loading indicator
-    // TODO: Add file uploads
     // TODO: Add image uploads
     val ctx = rememberPageContext()
 
@@ -58,6 +57,9 @@ fun CreatePost(viewModel: CreatePostViewModel = getCreatePostViewModel()) {
     val programmingLanguage = mutableStateOf<ProgrammingLanguage>(ProgrammingLanguage.KOTLIN)
     val categories = mutableListOf<Category>()
     val postSummary = mutableStateOf("")
+    lateinit var file: File
+
+    val formData = FormData()
 
 
     PageLayout(Strings.CreatePost(i18n4k.locale)) {
@@ -69,6 +71,20 @@ fun CreatePost(viewModel: CreatePostViewModel = getCreatePostViewModel()) {
                 val labelAttrs = Modifier.padding(top = PADDING_TOP, bottom = PADDING_BOTTOM).width(FIELD_WIDTH)
 
                 Form(attrs = { id("create-post-form") }) {
+                    Label(forId = "header", attrs = labelAttrs.toAttrs()) {
+                        Text("Header")
+                    }
+                    Br()
+                    Input(
+                        type = InputType.File,
+                        attrs = {
+                            id("header"); accept("image/png, image/jpeg");
+                            onChange {
+                                file = it.target.files!!.asList().single()
+                            }
+                        }
+                    )
+                    Br()
                     Label(forId = "post-title", attrs = labelAttrs.toAttrs()) {
                         Text("Post Title")
                     }
@@ -204,11 +220,9 @@ fun CreatePost(viewModel: CreatePostViewModel = getCreatePostViewModel()) {
                                 writtenLanguage = postLanguage.value,
                                 programmingLanguage = programmingLanguage.value,
                                 categories = categories,
-                                header = "https://unsplash.com/photos/the-night-sky-with-stars-and-the-milky-ItlpSSGhfyU"
                             )
-//                            println(post)
                             CoroutineScope(Dispatchers.Default).launch {
-                                val status = viewModel.createPost(dto)
+                                val status = viewModel.createPost(dto, file)
                                 if (status == HttpStatusCode.OK) ctx.router.navigateTo("/admin")
                             }
                         }

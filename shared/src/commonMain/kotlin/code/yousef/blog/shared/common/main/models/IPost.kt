@@ -5,7 +5,7 @@ import code.yousef.blog.shared.common.main.models.enums.*
 
 interface IPost {
     var id: String?
-    var header: String
+    var header: String?
     var postTitle: String
     var postSlug: String?
     var summary: String

@@ -34,11 +34,15 @@ val theme = MutableSilkPalettes(
         ),
         input = MutableSilkPalette.Input(
             filled = DarkTheme.INPUT_FILLED.color,
-            focusedBorder = DarkTheme.INPUT_FOCUSED_BORDER.color,
             hoveredBorder = DarkTheme.INPUT_HOVERED_BORDER.color,
             invalidBorder = DarkTheme.INPUT_INVALID_BORDER.color,
             filledHover = DarkTheme.INPUT_FILLED_HOVER.color,
             filledFocus = DarkTheme.INPUT_FILLED_FOCUS.color
+        ),
+        checkbox = MutableSilkPalette.Checkbox(
+            background = DarkTheme.CHECKBOX_BACKGROUND.color,
+            hover = DarkTheme.INPUT_HOVERED_BORDER.color,
+            color = DarkTheme.INPUT_FILLED_FOCUS.color
         )
     ),
     light = MutableSilkPalette(
@@ -71,11 +75,15 @@ val theme = MutableSilkPalettes(
         ),
         input = MutableSilkPalette.Input(
             filled = LightTheme.INPUT_FILLED.color,
-            focusedBorder = LightTheme.INPUT_FOCUSED_BORDER.color,
             hoveredBorder = LightTheme.INPUT_HOVERED_BORDER.color,
             invalidBorder = LightTheme.INPUT_INVALID_BORDER.color,
             filledHover = LightTheme.INPUT_FILLED_HOVER.color,
             filledFocus = LightTheme.INPUT_FILLED_FOCUS.color
+        ),
+        checkbox = MutableSilkPalette.Checkbox(
+            background = LightTheme.CHECKBOX_BACKGROUND.color,
+            hover = LightTheme.INPUT_HOVERED_BORDER.color,
+            color = LightTheme.INPUT_FILLED_FOCUS.color
         )
     )
 )
