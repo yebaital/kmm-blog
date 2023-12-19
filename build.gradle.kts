@@ -1,8 +1,8 @@
 plugins {
 //    alias(libs.plugins.kotlin.multiplatform) apply false
-    kotlin("multiplatform") version "1.9.21" apply false
-    kotlin("js") version "1.9.21" apply false
-    kotlin("jvm") version "1.9.21" apply false
+    kotlin("multiplatform") apply false
+    kotlin("js") apply false
+    kotlin("jvm") apply false
     alias(libs.plugins.jetbrains.compose) apply false
     alias(libs.plugins.kobweb.library) apply false
     alias(libs.plugins.kobwebx.markdown) apply false

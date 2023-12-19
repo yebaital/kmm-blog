@@ -32,3 +32,6 @@ kotlin-js-store
 /server/src/main/resources/privateKey.pem
 /local.properties
 /oldserver/
+
+# Ktor configuration
+/server/application.yaml

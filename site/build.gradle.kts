@@ -8,7 +8,7 @@ plugins {
     alias(libs.plugins.kobweb.application)
     alias(libs.plugins.kobwebx.markdown) apply true
     id("de.comahe.i18n4k") version "0.7.0"
-    kotlin("plugin.serialization") version "1.9.21"
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 group = "code.yousef.blog"
@@ -89,6 +89,9 @@ i18n4k {
 //    dependsOn(":site:generateI18n4kFiles")
 //}
 
+//tasks.getByPath(":site:kspKotlinJs").mustRunAfter(":site:generateI18n4kFiles")
+
+kotlin.sourceSets.getByName("jsMain").kotlin.srcDir(tasks.matching { it.name == "generateI18n4kFiles" })
 gradle.taskGraph.whenReady {
     allTasks
         .filter { it.hasProperty("duplicatesStrategy") } // Because it's some weird decorated wrapper that I can't cast.

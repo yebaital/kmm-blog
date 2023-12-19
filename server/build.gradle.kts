@@ -1,7 +1,7 @@
 plugins {
-    kotlin("jvm") version "1.9.21"
+    kotlin("jvm")
     application
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.21"
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 group = "code.yousef"
